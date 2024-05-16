@@ -9,9 +9,6 @@ function formSubmit() {
   form.addEventListener('submit', async (e) => {
     e.preventDefault();
 
-    const submitButton = document.querySelector('#submit-button');
-    submitButton.disabled = true;
-
     let valid = true;
     for (const element of form.elements) {
       if (element.type === 'submit' || element.type === 'reset') continue;
@@ -22,12 +19,16 @@ function formSubmit() {
     }
 
     if (grecaptcha.getResponse() == "") {
-      alert('do the captcha');
+      valid = false;
+      alert('Answer the captcha');
     }
 
     if (!valid) {
       scrollTop();
     } else {
+      const submitButton = document.querySelector('#submit-button');
+      submitButton.disabled = true;
+
       let formData = new FormData(form);
 
       for (const [key, value] of Object.entries(uploadedImage)) {
