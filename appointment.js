@@ -151,7 +151,7 @@ function documentTypePicker() {
                       <option value="Widowed">Widowed</option>
                       <hr>
                   </select>
-                  <label for="Tin">TIN ID NO: <span>(Numero sa iyong TIN)</span></label>
+                  <label for="Tin">TIN-ID NO: <span>(Numero sa iyong TIN)</span></label>
                   <input required type="text" name="TIN-no" id="Tin" placeholder="000-123-456-001 ">
                   <label for="height">Height: <span>(Tangkad)</span></label>
                   <input required type="text" name="applicant-height" id="applicant-height" placeholder="172 cm">
@@ -161,11 +161,11 @@ function documentTypePicker() {
                   <input required type="text" name="applicant-occupation" id="applicant-occupation" placeholder="Guro">
                   <label for="gross-salary">Monthly Gross Salary / Annual Gross: <span>(Buwanang Sweldo/Kabuuang Sweldo sa
                           isang taon)</span></label>
-                  <input required type="text" name="applicant-monthly-salary" id="monthly-gross-salary"
+                  <input required type="number" name="applicant-monthly-salary" id="monthly-gross-salary"
                       placeholder="PHP 50,000/PHP 600,000">
                   <label for="daily-income">If (Business) Income in a Day: <span>(Kung negosyo, kita sa isang
                           araw)</span></label>
-                  <input required type="text" name="applicant-daily-income" id="daily-income" placeholder="PHP 5,000">
+                  <input required type="number" name="applicant-daily-income" id="daily-income" placeholder="PHP 5,000">
                   <label for="business-name">Name of Business: <span>(Pangalan ng Negosyo)</span></label>
                   <input required type="text" name="applicant-business-name" id="applicant-business-name" placeholder="Sari-sari Store">
                   <label for="purpose">Purpose: <span>(Para saan ang cedula)</span></label>
@@ -198,7 +198,7 @@ function documentTypePicker() {
                   <label for="business-name">Name of Business: <span>(Pangalan ng Negosyo)</span></label>
                   <input required type="text" name="applicant-business-name" id="applicant-business-name" placeholder="Sari-sari Store">
                   <label for="business-capital">Capital of Business: <span>(Kapital ng Negosyo)</span></label>
-                  <input required type="text" name="applicant-business-capital" id="applicant-business-name" placeholder="PHP 50,000">
+                  <input required type="number" name="applicant-business-capital" id="applicant-business-name" placeholder="PHP 50,000">
                   <label for="purpose">Purpose: <span>(Para saan o saan gagamitin ang business Clearance)</span></label>
                   <select name="applicant-business-reason" id="business-clearance-reason">
                       <option value="New Business Permit">New Business Permit</option>
