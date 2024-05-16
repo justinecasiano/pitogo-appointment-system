@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="appointment.css">
+  <title>Pitogo Appointment Website</title>
+  <script defer src="appointment.js"></script>
+  <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+
+<body>
+  <header>
+    <a href="index.html"><img src="images/Pitogo_Logo.png" alt="Logo of Pitogo" /></a>
+  </header>
+  <main>
+    <form id="appointment-form">
+      <div class="form-fields">
+        <legend>Personal Information <span>(Personal na Impormasyon)</span></legend>
+        <hr>
+        <label for="fullname">
+          <p>Full Name: <span>(Buong Pangalan)</span></p>
+        </label>
+        <input required type="text" name="fullname" id="fullname" placeholder="Jose P. Rizal Jr.">
+
+        <label for="address">
+          <p>Address:</p>
+        </label>
+        <input required type="address" name="address" id="address"
+          placeholder="123 Cebu St. Barangay Pitogo, Taguig City">
+
+        <label for="email">
+          <p>Email <span>(if applicable)</span></p>
+        </label>
+        <input required type="email" name="email" id="email" placeholder="joserizal@example.com">
+
+        <label for="contactnumber">
+          <p>Contact No.</p>
+        </label>
+        <input required type="text" name="contact-no" id="contactnumber" placeholder="09123456789">
+        <label for="id-picture">
+          <p>Upload Valid ID</p>
+        </label>
+        <input required type="file" name="valid-id" id="id-picture" accept="image/png, image/jpeg">
+      </div>
+
+      <div class="form-fields">
+        <p>Purpose <span>(Dahilan)</span></p>
+        <hr>
+        <label for="documentType">
+          <p>What do you need? <span>(Document)</span></p>
+        </label>
+        <select required id="documentType" name="document">
+          <option value="cedula">
+            Cedula
+          </option>
+          <hr>
+          <option value="barangay-clearance">
+            Barangay Clearance/Certificate
+          </option>
+          <hr>
+          <option value="barangay-business-clearance">
+            Barangay Business Clearance
+          </option>
+          <hr>
+          <option value="barangay-id">
+            Barangay ID
+          </option>
+        </select>
+      </div>
+
+      <div class="form-fields-add" id="form-fields-add">
+      </div>
+
+      <div class="form-fields">
+        <div class="authorization">
+          <input required type="checkbox" id="authroize" name="authorize">
+          <label for="authorize" class="authorize">
+            <p>I hereby authorize Barangay Pitogo, to collect and process the data indicated herein.
+              I understand that my personal
+              information is protected by RA 10173, Data Privacy Act of 2012, and that I am required by RA 11469,
+              Bayanihan Heal
+              as One Act, to provide truthful information.<br><span>
+                (Pinahihintulutan ko ang Barangay Pitogo, upang mangolekta at iproseso ang
+                datos
+                na ipinahiwatig dito. Naiintindihan
+                ko na
+                ang aking personal na impormasyon ay protektado ng RA 10173, Data Privacy Act of 2012,
+                at
+                hiniling ako ng RA 11469, ang Bayanihan Heal bilang Isang Batas, upang magbigay ng
+                makatotohanang impormasyon.)
+              </span></p>
+          </label>
+        </div>
+      </div>
+      <div class="g-recaptcha" data-sitekey="6LdtA9wpAAAAAJRnYTdUZZlbKIF4Llsbj1Vr8pKl"></div><br>
+      <div class="buttons">
+        <input type="reset">
+        <input id="submit-button" type="submit">
+      </div>
+    </form>
+    <a class="go-back" href="index.html"> <- Back to Main Page</a>
+  </main>
+
+</body>
+
+</html>
