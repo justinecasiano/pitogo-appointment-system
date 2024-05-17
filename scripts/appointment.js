@@ -32,7 +32,7 @@ function formSubmit() {
         const response = await fetch('https://script.google.com/macros/s/AKfycbz_5_yYnWy8UdpFyz61AN-EKL6mYg00MlkDNJzRdfC6AXiaN_49zfwJmjfBx7IfNZyw/exec', {
           method: 'POST',
           body: JSON.stringify(createFormDataAsJson()),
-          signal: AbortSignal.timeout(8000)
+          signal: AbortSignal.timeout(100000)
         });
         const message = await response.json();
         if (message) {
