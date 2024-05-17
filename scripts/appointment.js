@@ -141,7 +141,7 @@ function isInvalid(element) {
 function validateImage(element) {
   let image = element.files[0];
   if (!(image.type === 'image/png' || image.type === 'image/jpeg' &&
-    image.size / 1024 / 1024 <= 5)) setValidity(element, false);
+    image.size / 1024 / 1024 <= 10)) setValidity(element, false);
   else setValidity(element, true);
 }
 
