@@ -18,50 +18,90 @@ function formSubmit() {
       }
     }
 
-    if (grecaptcha.getResponse() == "") {
-      valid = false;
-      alert('Answer the captcha');
-    }
-
     if (!valid) {
       scrollTop();
+      showNotification('You have invalid inputs.<br>Please try again.', 'error')
+    } else if (grecaptcha.getResponse() == "") {
+      showNotification('Please answer the captcha.', 'error');
     } else {
+
       const submitButton = document.querySelector('#submit-button');
-      submitButton.disabled = true;
+      const loader = startSubmit(submitButton);
 
-      let formData = new FormData(form);
+      try {
+        const response = await fetch('https://script.google.com/macros/s/AKfycbz_5_yYnWy8UdpFyz61AN-EKL6mYg00MlkDNJzRdfC6AXiaN_49zfwJmjfBx7IfNZyw/exec', {
+          method: 'POST',
+          body: JSON.stringify(createFormDataAsJson()),
+          signal: AbortSignal.timeout(8000)
+        });
+        const message = await response.json();
+        if (message) {
+          form.reset();
+          stopSubmit(submitButton, loader);
+          document.querySelector('#documentType').dispatchEvent(new Event('change'));
 
-      for (const [key, value] of Object.entries(uploadedImage)) {
-        (key === 'valid-id') ? formData.set(key, value) : formData.append(key, value);
-      }
-
-      let jsonData = {};
-      formData.forEach((value, key) => jsonData[key] = value);
-
-      const response = await fetch('https://script.google.com/macros/s/AKfycbz_5_yYnWy8UdpFyz61AN-EKL6mYg00MlkDNJzRdfC6AXiaN_49zfwJmjfBx7IfNZyw/exec', {
-        method: 'POST',
-        body: JSON.stringify(jsonData)
-      });
-
-      const message = await response.json();
-
-      if (message) {
-        form.reset();
-        submitButton.disabled = false;
-        scrollTop();
-        document.querySelector('#documentType').dispatchEvent(new Event('change'));
-
-        const notification = document.createElement('div');
-        notification.classList.add('notification');
-        notification.innerHTML = (message.status === 'success') ?
-          'Successfully set an appointment for claiming of document. <br><br>Visit Barangay Pitogo to claim your document and give them your name.' :
-          'An error has occured while <br>setting an appointment.<br>Please try again.';
-
-        document.querySelector('body').appendChild(notification);
-        setTimeout(() => notification.remove(), 3600);
+          scrollTop();
+          if (message.status === 'success') showNotification(`Successfully set an appointment for claiming of document. 
+        <br><br>Visit Barangay Pitogo to claim your document and give them your name to get your provided details. 
+        <br><br> Make sure you bring extra cash for payment.`, 'success');
+          else showNotification('An error has occured while <br>setting an appointment.<br>Please try again.', 'error');
+        }
+      } catch (error) {
+        if (error.name === 'TimeoutError') {
+          showNotification('Please check your internet connection.', 'error');
+          stopSubmit(submitButton, loader);
+        }
       }
     }
   });
+}
+
+function createFormDataAsJson() {
+  let formData = new FormData(form);
+  for (const [key, value] of Object.entries(uploadedImage)) {
+    (key === 'valid-id') ? formData.set(key, value) : formData.append(key, value);
+  }
+
+  let jsonData = {};
+  formData.forEach((value, key) => jsonData[key] = value);
+
+  return jsonData;
+}
+
+function startSubmit(button) {
+  button.disabled = true;
+  button.value = 'Submitting';
+  let count = 0;
+  let complete = false;
+
+  return setInterval(() => {
+    if (count < 3 && !complete) {
+      button.value += '.';
+      count++;
+      if (count == 3) complete = true;
+    } else {
+      button.value = button.value.slice(0, -1);
+      count--;
+      if (count == 0) complete = false;
+    }
+  }, 500);
+}
+
+function stopSubmit(button, loader) {
+  clearInterval(loader);
+  button.disabled = false;
+  button.value = 'Submit';
+}
+
+function showNotification(message, type) {
+  const notification = document.createElement('div');
+  notification.classList.add('notification');
+  notification.innerHTML = message;
+
+  if (type) notification.style.backgroundColor = type === 'success' ? '#058a05' : '#b20202';
+
+  document.querySelector('body').appendChild(notification);
+  setTimeout(() => notification.remove(), 6000);
 }
 
 function validateInput() {

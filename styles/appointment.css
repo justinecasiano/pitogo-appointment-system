@@ -116,15 +116,15 @@ input[type=checkbox] {
 }
 
 .buttons {
-
+  width: 50%;
   display: flex;
   gap: 3%;
-  width: 40%;
-
 }
 
 input[type=submit],
 input[type=reset] {
+  width: fit-content;
+  padding: 10px;
   font-family: "Poppins", sans-serif;
   font-size: 15px;
   text-align: center;
@@ -143,10 +143,11 @@ input[type=reset]:hover {
   background-color: #054A88;
 }
 
-
+input[disabled] {
+  pointer-events: none;
+}
 
 textarea {
-
   min-width: 100%;
   max-width: 100%;
   min-height: 15rem;
@@ -168,13 +169,12 @@ textarea {
 }
 
 .notification {
-  width: 300px;
-  background: #054A88;
+  width: 330px;
 
   position: fixed;
   inset: 50px 0 auto 0;
   margin-inline: auto;
-  padding: 30px;
+  padding: 20px;
   border-radius: 15px;
 
   color: white;
@@ -184,7 +184,7 @@ textarea {
   vertical-align: middle;
   overflow-wrap: break-word;
 
-  animation: fadeOut ease-out 3.5s forwards;
+  animation: fadeOut ease-out 5s forwards;
 }
 
 @keyframes fadeOut {
@@ -219,13 +219,9 @@ textarea {
 }
 
 @media (max-width: 1080px) {
-
-
   header img {
-
     height: 3rem;
   }
-
 
   .form-fields,
   .form-fields-add {

@@ -24,7 +24,7 @@ main {
   align-items: center;
   flex-direction: column;
   text-align: center;
-  background-image: url("images/BACKGROUND.png");
+  background-image: url("../images/BACKGROUND.png");
   background-position: center;
   background-size: cover;
   color: white;
